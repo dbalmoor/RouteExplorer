@@ -1,0 +1,28 @@
+/* Apply styles to the entire table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  border: 2px solid #ccc; /* Add border to the entire table */
+}
+
+/* Style the table header cells */
+th {
+  text-align: center;
+  font-size: large;
+  padding: 10px;
+  color: #cd6868;
+  border: 1px solid #ddd;
+}
+
+/* Style the table body cells */
+td {
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+/* Style the table container */
+#route-table {
+  padding: 20px;
+  border: 2px solid #ccc;
+}
