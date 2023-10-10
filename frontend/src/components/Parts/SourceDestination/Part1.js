@@ -208,7 +208,7 @@ const Part1 = () => {
                   name="source"
                   onChange={handleInput}
                   // onClick={getSourceList}
-                  autoComplete="current-source"
+                  autoComplete="off"
                   className="bg-transparent text-lg border-[1px] border-gray-400 rounded-md pl-2"
                 />
                 <div id="sourceLists"></div>
@@ -222,7 +222,7 @@ const Part1 = () => {
                   placeholder="Enter Destination"
                   name="destination"
                   onChange={handleInput}
-                  autoComplete="current-destination"
+                  autoComplete="off"
                   className="bg-transparent text-lg border-[1px] border-gray-400 rounded-md pl-2"
                 />
               </div>

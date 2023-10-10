@@ -1,6 +1,9 @@
 const express = require("express");
 const mysql = require('mysql');
 const cors = require('cors');
+const jwt = require('jsonwebtoken');
+const dotenv = require('dotenv');
+dotenv.config();
 
 
 
@@ -87,6 +90,28 @@ app.post('/allRoutes', (req, res) => {
       
     }
   });
+
+
+});
+
+
+app.post('/allstops', (req, res) => {
+
+  const sql = `SELECT DISTINCT stop_name FROM bus_stops_numbers ORDER BY stop_name ASC;`;
+  db.query(sql, (err, results) => {
+    if (err) {
+      res.status(500).json({ error: 'Error fetching routes' });
+    } else if (results.length === 0) {
+      res.status(404).json({ error: 'No route found for the given source and destination' });
+    } else {
+      const route = results;
+      console.log(route);
+      res.json(route);
+      
+    }
+  });
+
+  
 });
 
 app.post('/allNumbers', (req, res) => {
@@ -165,7 +190,7 @@ app.post('/login', (req, res) => {
         if(err) {
             return res.json(err);
         }
-        if(data.length > 0) {
+        else if(data.length > 0) {
             return res.json("Success");
         }
         else {

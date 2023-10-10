@@ -2,7 +2,9 @@ import React from "react";
 import Contact from "../Contact/Contact";
 
 const UserInfo = () => {
-  const password = sessionStorage.getItem("password");
+  const changePassword = () => {
+    console.log("change password");
+  };
   return (
     <div className="text-white font-serif h-auto flex flex-col items-center justify-center bg-gray-800">
       <div className="pt-5 flex flex-col h-auto w-full items-center justify-center">
@@ -27,9 +29,12 @@ const UserInfo = () => {
             </div>
             <div className="flex gap-2">
               <p className="flex text-xl font-serif text-gray-100">Password:</p>
-              <span className="text-lg font-serif text-gray-400 hidden">
-                {sessionStorage.getItem("password")}
-              </span>
+              <button
+                onClick={changePassword}
+                className="flex justify-center items-center text-white w-full h-full hover:bg-gray-600 border-[1px] bg-gray-700 hover:text-white px-1 py-2 rounded-md text-sm font-medium text-decoration-none duration-300"
+              >
+                <strong>CHANGE PASSWORD</strong>
+              </button>
             </div>
           </div>
         </div>

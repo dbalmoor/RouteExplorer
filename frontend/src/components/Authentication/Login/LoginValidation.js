@@ -1,6 +1,7 @@
-function Validation(values) {
+const Validation = (values) => {
  
     let error={}
+    console.log("Error")
 
     const email_pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     const password_pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]{8,}$/

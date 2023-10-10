@@ -2,13 +2,16 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Validation from "./SignupValidation";
 import axios from "axios";
+import Home from '../../Home/Home'
 
-function Signup({ loggedIn, handleLogin, handleLogout }) {
+function Signup({ }) {
   const [values, setValues] = useState({
     name: "",
     email: "",
     password: "",
   });
+
+  const loggedIn = sessionStorage.getItem("loggedIn");
 
   const navigate = useNavigate();
   const [errors, setErrors] = useState({});
@@ -20,14 +23,28 @@ function Signup({ loggedIn, handleLogin, handleLogout }) {
     }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async(event) => {
     event.preventDefault();
 
-    setErrors(Validation(values));
-    if (errors.name === "" && errors.email === "" && errors.password === "") {
-      axios
+    const validationErrors = await Validation(values);
+    setErrors(validationErrors);
+
+    // Check if there are any validation errors
+    if (Object.values(validationErrors).every((error) => !error)) {
+      try {
+        // If there are no errors, proceed with the login process
+        await handleSignin();
+      } catch (e) {
+        console.error("Error:", e);
+      }
+    }
+  };
+
+  const handleSignin = async(e) => {
+    try{
+      await axios
         .post("http://localhost:8081/signup", values)
-        .then((res) => {
+        .then(async (res) => {
           sessionStorage.setItem("loggedIn", true);
           sessionStorage.setItem("name", values.name);
           sessionStorage.setItem("email", values.email);
@@ -36,9 +53,16 @@ function Signup({ loggedIn, handleLogin, handleLogout }) {
         })
         .catch((err) => console.log("Error: " + err));
     }
-  };
+    catch(e){
+      console.log(e);
+    }
+  }
 
   return (
+    <div>
+      {loggedIn ? 
+      <Home/>
+      :
     <div className="flex items-center justify-center py-16 bg-slate-800">
       <div className="px-3 py-3 bg-slate-300 w-1/4 font-serif rounded-lg">
         <div className="flex justify-content-center">
@@ -109,6 +133,8 @@ function Signup({ loggedIn, handleLogin, handleLogout }) {
           </div>
         </form>
       </div>
+    </div>
+}
     </div>
   );
 }
