@@ -20,21 +20,6 @@ const db=mysql.createConnection({
 })
 
 
-
-
-app.get('/login', (req, res) => {
-    return res.json("From Backend");
-})
-app.get('/signup', (req, res) => {
-    return res.json("From Signup");
-})
-app.get('/routes', (req, res) => {
-    return res.json("From Routes");
-})
-app.get('/getName', (req, res) => {
-    return res.json("From gget Name");
-})
-
 app.post('/routes', (req, res) => {
 
   const sql = `SELECT bus_route
@@ -57,6 +42,24 @@ app.post('/routes', (req, res) => {
     }
   });
 });
+
+
+
+
+app.get('/login', (req, res) => {
+    return res.json("From Backend");
+})
+app.get('/signup', (req, res) => {
+    return res.json("From Signup");
+})
+app.get('/routes', (req, res) => {
+    return res.json("From Routes");
+})
+app.get('/getName', (req, res) => {
+    return res.json("From gget Name");
+})
+
+
 
 app.post('/busRoute', (req, res) => {
 
